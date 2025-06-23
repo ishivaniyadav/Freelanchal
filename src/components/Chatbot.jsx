@@ -45,10 +45,13 @@ const Chatbot = () => {
     setIsTyping(true);
 
     try {
-      const response = await fetch('https://hivenimble.onrender.com', {
+      
+      const API_BASE = import.meta.env.VITE_BACKEND_URL;
+
+      const response = await fetch(`${API_BASE}/api/chatbot`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: userMessage.text }),
+        body: JSON.stringify({ message: inputMessage }),
       });
 
       const data = await response.json();
