@@ -36,18 +36,20 @@ function App() {
     <Router>
       <AuthProvider>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/calendar" element={<ProtectedRoute><CalendarSection /></ProtectedRoute>} />
-          <Route path="/time" element={<ProtectedRoute><TimeTracker /></ProtectedRoute>} />
-          <Route path="/invoices" element={<ProtectedRoute><Invoices /></ProtectedRoute>} />
-          <Route path="/clients" element={<ProtectedRoute><ClientList /></ProtectedRoute>} />
-          <Route path="/clients/:id" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
+        <BrowserRouter basename="/HiveNimble">
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/calendar" element={<ProtectedRoute><CalendarSection /></ProtectedRoute>} />
+            <Route path="/time" element={<ProtectedRoute><TimeTracker /></ProtectedRoute>} />
+            <Route path="/invoices" element={<ProtectedRoute><Invoices /></ProtectedRoute>} />
+            <Route path="/clients" element={<ProtectedRoute><ClientList /></ProtectedRoute>} />
+            <Route path="/clients/:id" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </BrowserRouter>
         <Footer />
         <Chatbot />
       </AuthProvider>

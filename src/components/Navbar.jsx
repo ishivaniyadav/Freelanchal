@@ -20,19 +20,22 @@ const Navbar = () => {
         <Link to="/">HiveNimble</Link>
       </div>
       <ul className="navbar-links">
-        {/* <li><Link to="/home">Home</Link></li> */}
-        {user && <li><Link to="/home">Home</Link></li>}
-        {user && <li><Link to="/clients">Clients</Link></li>}
-        {user && <li><Link to="/dashboard">Dashboard</Link></li>}
-        {user && <li><Link to="/calendar">Calendar</Link></li>}
-        {user && <li><Link to="/time">Time Tracker</Link></li>}
-        {user && <li><Link to="/invoices">Invoices</Link></li>}
-        {user ? (
-          <li><button className="logout-btn" onClick={handleLogout}>Logout</button></li>
-        ) : (
+        {!user && (
           <>
             <li><Link to="/login">Login</Link></li>
             <li><Link to="/signup">Signup</Link></li>
+          </>
+        )}
+
+        {user && (
+          <>
+            <li><Link to="/home">Home</Link></li>
+            <li><Link to="/clients">Clients</Link></li>
+            <li><Link to="/dashboard">Dashboard</Link></li>
+            <li><Link to="/calendar">Calendar</Link></li>
+            <li><Link to="/time">Time Tracker</Link></li>
+            <li><Link to="/invoices">Invoices</Link></li>
+            <li><button className="logout-btn" onClick={handleLogout}>Logout</button></li>
           </>
         )}
       </ul>
