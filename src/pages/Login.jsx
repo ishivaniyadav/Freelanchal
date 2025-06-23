@@ -12,7 +12,7 @@ export default function Login() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       alert("Login failed: " + err.message);
     }
@@ -21,7 +21,7 @@ export default function Login() {
   const handleGoogleLogin = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       alert("Google login failed: " + err.message);
     }

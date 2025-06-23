@@ -12,7 +12,7 @@ export default function Signup() {
     e.preventDefault();
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      navigate("/");
+      navigate("/home");
     } catch (err) {
       alert("Signup failed: " + err.message);
     }
