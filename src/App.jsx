@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -21,10 +21,11 @@ import Dashboard from "./pages/Dashboard";
 import TimeTracker from "./pages/TimeTracker";
 import "./styles/index.css";
 import Chatbot from './components/Chatbot';
+
 const Home = () => (
   <>
     <Hero />
-    <About/>
+    <About />
     <Features />
     <Projects />
     <Invoices />
@@ -33,27 +34,27 @@ const Home = () => (
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter basename="/HiveNimble"> {/* ✅ Only one router */}
       <AuthProvider>
         <Navbar />
-        <BrowserRouter basename="/HiveNimble">
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/calendar" element={<ProtectedRoute><CalendarSection /></ProtectedRoute>} />
-            <Route path="/time" element={<ProtectedRoute><TimeTracker /></ProtectedRoute>} />
-            <Route path="/invoices" element={<ProtectedRoute><Invoices /></ProtectedRoute>} />
-            <Route path="/clients" element={<ProtectedRoute><ClientList /></ProtectedRoute>} />
-            <Route path="/clients/:id" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        </BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/signup" />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+
+          {/* ✅ Protected routes */}
+          <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/calendar" element={<ProtectedRoute><CalendarSection /></ProtectedRoute>} />
+          <Route path="/time" element={<ProtectedRoute><TimeTracker /></ProtectedRoute>} />
+          <Route path="/invoices" element={<ProtectedRoute><Invoices /></ProtectedRoute>} />
+          <Route path="/clients" element={<ProtectedRoute><ClientList /></ProtectedRoute>} />
+          <Route path="/clients/:id" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
+        </Routes>
         <Footer />
         <Chatbot />
       </AuthProvider>
-    </Router>
+    </BrowserRouter>
   );
 }
 
