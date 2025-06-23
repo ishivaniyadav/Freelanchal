@@ -20,7 +20,8 @@ const Navbar = () => {
         <Link to="/">HiveNimble</Link>
       </div>
       <ul className="navbar-links">
-        <li><Link to="/">Home</Link></li>
+        {/* <li><Link to="/home">Home</Link></li> */}
+        {user && <li><Link to="/home">Home</Link></li>}
         {user && <li><Link to="/clients">Clients</Link></li>}
         {user && <li><Link to="/dashboard">Dashboard</Link></li>}
         {user && <li><Link to="/calendar">Calendar</Link></li>}
