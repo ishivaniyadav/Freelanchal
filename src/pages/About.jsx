@@ -13,12 +13,12 @@ const About = () => {
 
       <div className="comparison-block">
         <div className="comparison">
-          <h3>Without HiveNimble</h3>
-          <img src={withoutImg} alt="Without HiveNimble" />
+          <h3>Without Freelanchal</h3>
+          <img src={withoutImg} alt="Without Freelanchal" />
         </div>
         <div className="comparison">
-          <h3>With HiveNimble</h3>
-          <img src={withImg} alt="With HiveNimble" />
+          <h3>With Freelanchal</h3>
+          <img src={withImg} alt="With Freelanchal" />
         </div>
       </div>
     </section>

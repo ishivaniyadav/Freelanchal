@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDjInR_ImJeuIl_JuRD7nWAd3QoxsGPHxA",
-  authDomain: "hivenimble.firebaseapp.com",
-  projectId: "hivenimble",
-  storageBucket: "hivenimble.firebasestorage.app",
-  messagingSenderId: "1054736981436",
-  appId: "1:1054736981436:web:8c479a83244046679f1fb9",
-  measurementId: "G-QP2Z7B7C8L"
+  apiKey: "AIzaSyCiFdFS3XWAqU7vW4lG-1tNCpZkGxS2kfU",
+  authDomain: "freelanchal.firebaseapp.com",
+  projectId: "freelanchal",
+  storageBucket: "freelanchal.firebasestorage.app",
+  messagingSenderId: "501105979584",
+  appId: "1:501105979584:web:175c8030f7a4d325c67d25",
+  measurementId: "G-TN0ZY4CG4E"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -1,24 +1,19 @@
-import express from 'express';
-import cors from 'cors';
-import chatbotRoutes from './routes/chatbot.js';
+const express = require('express');
+const cors = require('cors');
+const chatbotRoute = require('./routes/chatbot');
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
-app.use(cors({
-  origin: "https://ishivaniyadav.github.io",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
-
+app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Backend is running. CORS is enabled.");
+app.use('/api/chatbot', chatbotRoute);
+
+app.get('/', (req, res) => {
+  res.send('Freelanchal Backend is running!');
 });
 
-app.use('/api', chatbotRoutes);
-
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section className="hero">
       <div className="hero-content">
-        <h1>HiveNimble - Build for Freelancers.</h1>
+        <h1>Freelanchal - Build for Freelancers.</h1>
         <p>Manage your clients, projects, invoices, and time with ease.</p>
         <a href="#Features" className="hero-btn">Get Started</a>
       </div>

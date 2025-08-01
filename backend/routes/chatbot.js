@@ -3,128 +3,72 @@ const router = express.Router();
 
 const mockData = {
   projects: [
-    { id: 1, name: 'E-commerce Website', status: 'active', deadline: '2025-07-15', freelancer: 'John Doe' },
-    { id: 2, name: 'Mobile App Development', status: 'in-progress', deadline: '2025-08-20', freelancer: 'Jane Smith' },
-    { id: 3, name: 'Logo Design', status: 'completed', deadline: '2025-06-30', freelancer: 'Mike Johnson' }
+    { name: 'E-commerce Website', status: 'active', deadline: '2025-07-15', freelancer: 'John Doe' },
+    { name: 'Mobile App', status: 'in-progress', deadline: '2025-08-20', freelancer: 'Jane Smith' }
   ],
   freelancers: [
-    { id: 1, name: 'Siwach', skills: ['React', 'Node.js'], status: 'busy', rating: 4.8 },
-    { id: 2, name: 'Kabir', skills: ['Flutter', 'Dart'], status: 'available', rating: 4.9 },
-    { id: 3, name: 'Anaya', skills: ['Photoshop', 'Illustrator'], status: 'available', rating: 4.7 }
+    { name: 'John Doe', skills: ['React', 'Node.js'], status: 'available', rating: 4.8 },
+    { name: 'Jane Smith', skills: ['Flutter', 'Dart'], status: 'busy', rating: 4.7 }
   ],
   payments: [
-    { id: 1, project: 'E-commerce Website', amount: 2500, status: 'pending', dueDate: '2025-07-01' },
-    { id: 2, project: 'Logo Design', amount: 500, status: 'paid', paidDate: '2025-06-25' }
+    { project: 'E-commerce Website', amount: 2500, status: 'pending', dueDate: '2025-07-01' }
   ]
 };
 
-function identifyIntent(message) {
-  const lower = message.toLowerCase();
-  if (lower.includes('project') && (lower.includes('active') || lower.includes('show'))) return 'show_projects';
-  if (lower.includes('payment') || lower.includes('pay')) return 'payment_status';
-  if (lower.includes('freelancer') && lower.includes('available')) return 'available_freelancers';
-  if (lower.includes('deadline') || lower.includes('due')) return 'project_deadlines';
-  if (lower.includes('hello') || lower.includes('hi') || lower.includes('hey')) return 'greeting';
-  if (lower.includes('help') || lower.includes('what can you do')) return 'help';
+function identifyIntent(message = '') {
+  const msg = message.toLowerCase();
+  if (msg.includes('project') && msg.includes('active')) return 'show_projects';
+  if (msg.includes('freelancer') && msg.includes('available')) return 'available_freelancers';
+  if (msg.includes('payment')) return 'payment_status';
+  if (msg.includes('deadline')) return 'project_deadlines';
+  if (msg.includes('hello') || msg.includes('hi')) return 'greeting';
+  if (msg.includes('help')) return 'help';
   return 'general';
 }
 
 function generateResponse(intent) {
   switch (intent) {
-    case 'show_projects': {
-      const active = mockData.projects.filter(p => ['active', 'in-progress'].includes(p.status));
-      if (!active.length) return "🚧 You don't have any active projects right now.";
-
-      let msg = "📋 Your Active Projects:\n\n";
-      active.forEach(p => {
-        msg += `• ${p.name}\n  Status: ${p.status}\n  Freelancer: ${p.freelancer}\n  Deadline: ${p.deadline}\n\n`;
-      });
-      return msg;
-    }
-
-    case 'payment_status': {
-      let msg = "💳 Payment Information:\n\n";
-      mockData.payments.forEach(p => {
-        msg += `• ${p.project}\n  Amount: ₹${p.amount}\n  Status: ${p.status}\n`;
-        msg += p.status === 'pending' ? `  Due: ${p.dueDate}\n\n` : `  Paid: ${p.paidDate}\n\n`;
-      });
-      return msg;
-    }
-
-    case 'available_freelancers': {
+    case 'show_projects':
+      return mockData.projects.map(p =>
+        `📌 ${p.name}\nStatus: ${p.status}\nFreelancer: ${p.freelancer}\nDeadline: ${p.deadline}`
+      ).join('\n\n');
+    case 'available_freelancers':
       const available = mockData.freelancers.filter(f => f.status === 'available');
-      if (!available.length) return "⚠️ No freelancers are currently available.";
-
-      let msg = "🧑‍💻 Available Freelancers:\n\n";
-      available.forEach(f => {
-        msg += `• ${f.name}\n  Skills: ${f.skills.join(', ')}\n  Rating: ${f.rating}/5 ⭐\n\n`;
-      });
-      return msg;
-    }
-
-    case 'project_deadlines': {
-      const upcoming = mockData.projects
-        .filter(p => new Date(p.deadline) > new Date())
-        .sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
-      if (!upcoming.length) return "🎉 No upcoming project deadlines.";
-
-      let msg = "⏰ Upcoming Deadlines:\n\n";
-      upcoming.forEach(p => {
-        msg += `• ${p.name}\n  Deadline: ${p.deadline}\n  Freelancer: ${p.freelancer}\n\n`;
-      });
-      return msg;
-    }
-
+      return available.length > 0
+        ? available.map(f =>
+            `👤 ${f.name}\nSkills: ${f.skills.join(', ')}\nRating: ⭐ ${f.rating}/5`
+          ).join('\n\n')
+        : "⚠️ No freelancers currently available.";
+    case 'payment_status':
+      return mockData.payments.map(p =>
+        `💳 ${p.project}\nAmount: ₹${p.amount}\nStatus: ${p.status}\nDue: ${p.dueDate}`
+      ).join('\n\n');
+    case 'project_deadlines':
+      return mockData.projects.map(p =>
+        `📅 ${p.name}\nDeadline: ${p.deadline}\nFreelancer: ${p.freelancer}`
+      ).join('\n\n');
     case 'greeting':
-      return "👋 Hello! I can help with your projects, payments, freelancers, or deadlines. Type 'help' to get started.";
-
+      return "👋 Hello! Ask me about your projects, payments, freelancers, or deadlines.";
     case 'help':
-      return `🆘 I can help you with:\n\n- Show my active projects\n- Check payment status\n- Find available freelancers\n- View project deadlines`;
-
+      return `🛠 I can help you with:\n- Show active projects\n- View payments\n- Find available freelancers\n- Check deadlines`;
     default:
-      return "🤖 I'm not sure how to help with that. Try asking about your 'projects', 'payments', or 'deadlines'.";
+      return "❓ I'm not sure how to help with that. Try asking something like 'Show my active projects'.";
   }
 }
 
 router.post('/chatbot', (req, res) => {
   try {
     const { message } = req.body;
-
-    if (!message || message.trim() === '') {
-      return res.status(400).json({
-        error: 'Message is required',
-        response: '❗ Please enter a valid message.'
-      });
+    if (!message || typeof message !== 'string') {
+      return res.status(400).json({ response: '⚠️ Please send a valid message.' });
     }
-
     const intent = identifyIntent(message);
     const response = generateResponse(intent);
-
-    console.log(`[Chatbot] User: ${message}`);
-    console.log(`[Chatbot] Intent: ${intent}`);
-    console.log(`[Chatbot] Response: ${response}`);
-
-    res.json({
-      response,
-      intent,
-      timestamp: new Date().toISOString()
-    });
-
+    return res.json({ response });
   } catch (error) {
-    console.error('Chatbot error:', error);
-    res.status(500).json({
-      error: 'Internal server error',
-      response: '⚠️ Something went wrong. Please try again later.'
-    });
+    console.error('Chatbot error:', error.message);
+    return res.status(500).json({ response: '🚫 Something went wrong on the server.' });
   }
-});
-
-router.get('/chatbot/health', (req, res) => {
-  res.json({
-    status: 'healthy',
-    message: 'Chatbot API is running',
-    timestamp: new Date().toISOString()
-  });
 });
 
 export default router;

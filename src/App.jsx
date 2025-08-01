@@ -34,15 +34,13 @@ const Home = () => (
 
 function App() {
   return (
-    <BrowserRouter basename="/HiveNimble"> {/* ✅ Only one router */}
+    <BrowserRouter> 
       <AuthProvider>
         <Navbar />
         <Routes>
           <Route path="/" element={<Navigate to="/signup" />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-
-          {/* ✅ Protected routes */}
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/calendar" element={<ProtectedRoute><CalendarSection /></ProtectedRoute>} />
