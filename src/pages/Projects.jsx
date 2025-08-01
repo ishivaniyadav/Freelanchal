@@ -14,8 +14,9 @@ const Projects = () => {
           status: "active",
           freelancer: "Shivani Yadav",
           deadline: "2025-07-15",
-          description: "Annapoori is a full-featured web application that connects food donors with communities in need. It facilitates food and monetary donations, tracks donation requests, filters expired food, and builds transparency to inspire more contributions.",
+          description: "Annapoori is a full-featured web application that connects food donors with communities in need...",
           github: "https://annapoori.vercel.app/",
+          image: "https://github.com/user-attachments/assets/9ebbcbf6-2cf8-48f5-9971-00314c1e5323", 
         },
         {
           id: 2,
@@ -23,8 +24,9 @@ const Projects = () => {
           status: "in-progress",
           freelancer: "Shivani Yadav",
           deadline: "2025-08-10",
-          description: "This project recreates the Netflix homepage UI using HTML, CSS, and JavaScript, enhanced with TMDB API integration to dynamically display real movie and TV show data. Though there are no clickable features, the project demonstrates live banner updates and poster rows based on genres and categories.",
+          description: "This project recreates the Netflix homepage UI using HTML, CSS, and JavaScript...",
           github: "https://ishivaniyadav.github.io/Netflix_Clone/",
+          image: "https://github.com/user-attachments/assets/333cc79a-603f-47c6-af58-ee2916af17fc",
         },
         {
           id: 3,
@@ -32,8 +34,9 @@ const Projects = () => {
           status: "completed",
           freelancer: "Shivani Yadav",
           deadline: "2025-06-01",
-          description: "A thoughtfully crafted e-commerce front-end for Mud & Muse — where the timeless beauty of earth and fire meets minimal design. This platform honors the essence of handmade ceramics through a serene, elegant digital experience.",
+          description: "A thoughtfully crafted e-commerce front-end for Mud & Muse...",
           github: "https://ishivaniyadav.github.io/Mud-and-Muse/",
+          image: "https://github.com/user-attachments/assets/b8ea4749-4fd7-49cc-b651-548f78eb1d8b",
         },
       ];
       setProjects(data);
@@ -48,6 +51,8 @@ const Projects = () => {
       <div className="projects-grid">
         {projects.map((project) => (
           <div key={project.id} className={`project-card ${project.status}`}>
+            <img src={project.image} alt={project.name} className="project-image" />
+
             <div className="card-header">
               <h3>{project.name}</h3>
               <span className={`status-tag ${project.status}`}>{project.status}</span>
