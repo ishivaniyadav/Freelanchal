@@ -1,18 +1,14 @@
-# 🐝 HiveNimble – A Collaborative Workspace
+# 🐝 Freelanchal – A Collaborative Workspace
 
 ![Image](https://github.com/user-attachments/assets/24e86fe8-b8d3-4c37-a4ef-59db94d1aa0d)
 
-HiveNimble is a full-stack web application that helps freelancers **track projects**, **manage clients**, **log time**, **generate invoices**, and **interact via chatbot** – all in one place.
+Freelanchal is a full-stack web application that helps freelancers **track projects**, **manage clients**, **log time**, **generate invoices**, and **interact via chatbot** – all in one place.
 
-🚀 Designed with productivity in mind, HiveNimble empowers freelancers to work smarter and faster.
+🚀 Designed with productivity in mind, Freelanchal empowers freelancers to work smarter and faster.
 
 ---
 
 ## 📸 Demo
-
-🔗 [Live App on Github](https://ishivaniyadav.github.io/HiveNimble/)  
-🔗 [Backend on Render](https://hivenimble.onrender.com)
-
 ---
 
 ## 🔧 Features
@@ -56,7 +52,7 @@ npm start
 ## 📁 Project Structure
 
 ```
-HiveNimble/
+Freelanchal/
 ├── public/
 ├── src/
 │   ├── components/
@@ -97,4 +93,4 @@ If you like this project:
 
 ---
 
-> 💡 *Built with love, caffeine & hustle in the HiveNimble nest 🐝*
+> 💡 *Built with love, caffeine & hustle in the Freelanchal nest 🐝*
