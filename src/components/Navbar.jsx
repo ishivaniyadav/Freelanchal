@@ -11,13 +11,13 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     await signOut(auth);
-    navigate("/login");
+    navigate("/LandingPage");
   };
 
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <Link to="/">HiveNimble</Link>
+        <Link to="/">Freelanchal</Link>
       </div>
       <ul className="navbar-links">
         {!user && (

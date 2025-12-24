@@ -10,21 +10,23 @@ const Projects = () => {
       const data = [
         {
           id: 1,
-          name: "QuizBit",
+          name: "Annapoori",
           status: "active",
-          freelancer: "Shivram",
+          freelancer: "Shivani Yadav",
           deadline: "2025-07-15",
-          description: "A sleek and interactive quiz application built using React.js, designed to provide users with a dynamic multiple-choice quiz experience. Score tracking, responsive UI, and a modern codebase make it an excellent project to showcase your frontend skills.",
-          github: "https://ishivaniyadav.github.io/QuizBit/",
+          description: "Annapoori is a full-featured web application that connects food donors with communities in need...",
+          github: "https://annapoori.vercel.app/",
+          image: "https://github.com/user-attachments/assets/9ebbcbf6-2cf8-48f5-9971-00314c1e5323", 
         },
         {
           id: 2,
-          name: "Weather App",
+          name: "Netflix Clone",
           status: "in-progress",
-          freelancer: "Shubham Shukla",
+          freelancer: "Shivani Yadav",
           deadline: "2025-08-10",
-          description: "Weather App is a fast, responsive web tool that provides real-time weather updates based on user location or city input. Designed with a clean UI, it delivers temperature, conditions, and forecasts—making weather tracking simple and accessible anytime, anywhere.",
-          github: "https://shubhamshuklax.github.io/Weather-App/",
+          description: "This project recreates the Netflix homepage UI using HTML, CSS, and JavaScript...",
+          github: "https://ishivaniyadav.github.io/Netflix_Clone/",
+          image: "https://github.com/user-attachments/assets/333cc79a-603f-47c6-af58-ee2916af17fc",
         },
         {
           id: 3,
@@ -32,8 +34,9 @@ const Projects = () => {
           status: "completed",
           freelancer: "Shivani Yadav",
           deadline: "2025-06-01",
-          description: "A thoughtfully crafted e-commerce front-end for Mud & Muse — where the timeless beauty of earth and fire meets minimal design. This platform honors the essence of handmade ceramics through a serene, elegant digital experience.",
+          description: "A thoughtfully crafted e-commerce front-end for Mud & Muse...",
           github: "https://ishivaniyadav.github.io/Mud-and-Muse/",
+          image: "https://github.com/user-attachments/assets/b8ea4749-4fd7-49cc-b651-548f78eb1d8b",
         },
       ];
       setProjects(data);
@@ -48,6 +51,8 @@ const Projects = () => {
       <div className="projects-grid">
         {projects.map((project) => (
           <div key={project.id} className={`project-card ${project.status}`}>
+            <img src={project.image} alt={project.name} className="project-image" />
+
             <div className="card-header">
               <h3>{project.name}</h3>
               <span className={`status-tag ${project.status}`}>{project.status}</span>

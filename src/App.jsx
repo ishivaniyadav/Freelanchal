@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import LandingPage from "./pages/LandingPage";
 
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -29,20 +30,20 @@ const Home = () => (
     <Features />
     <Projects />
     <Invoices />
+    <Chatbot />
   </>
+  
 );
 
 function App() {
   return (
-    <BrowserRouter basename="/HiveNimble"> {/* ✅ Only one router */}
+    <BrowserRouter> 
       <AuthProvider>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Navigate to="/signup" />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
-
-          {/* ✅ Protected routes */}
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
           <Route path="/calendar" element={<ProtectedRoute><CalendarSection /></ProtectedRoute>} />
@@ -52,7 +53,7 @@ function App() {
           <Route path="/clients/:id" element={<ProtectedRoute><ClientProfile /></ProtectedRoute>} />
         </Routes>
         <Footer />
-        <Chatbot />
+        {/* <Chatbot /> */}
       </AuthProvider>
     </BrowserRouter>
   );

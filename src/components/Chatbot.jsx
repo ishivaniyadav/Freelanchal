@@ -26,16 +26,29 @@ const Chatbot = () => {
     'View project deadlines'
   ];
 
-  const handleQuickAction = (action) => {
-    setInputMessage(action);
+  const mockBotResponse = (message) => {
+    const responses = {
+      'show my active projects': '📁 You have 3 active projects: Web App Revamp, Logo Design, and Blog Setup.',
+      'check payment status': '💰 You have received 75% of your payment. ₹15,000 is pending.',
+      'find available freelancers': '🧑‍💻 5 freelancers are available. Would you like to assign one?',
+      'view project deadlines': '📅 Your next project deadline is August 5, 2025. Want to see the timeline?'
+    };
+
+    return responses[message.toLowerCase()] || "🤖 Sorry, I didn’t understand that. Try asking about projects, payments, freelancers or deadlines.";
   };
 
-  const handleSendMessage = async () => {
-    if (!inputMessage.trim()) return;
+  const handleQuickAction = (action) => {
+    setInputMessage(action);
+    handleSendMessage(action); // Auto-send quick action
+  };
+
+  const handleSendMessage = (customInput = null) => {
+    const text = customInput || inputMessage;
+    if (!text.trim()) return;
 
     const userMessage = {
       id: Date.now(),
-      text: inputMessage,
+      text,
       sender: 'user',
       timestamp: new Date().toLocaleTimeString(),
     };
@@ -44,40 +57,17 @@ const Chatbot = () => {
     setInputMessage('');
     setIsTyping(true);
 
-    try {
-      
-      const API_BASE = import.meta.env.VITE_BACKEND_URL;
-
-      const response = await fetch(`${API_BASE}/api/chatbot`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: inputMessage }),
-      });
-
-      const data = await response.json();
-
-      setTimeout(() => {
-        const botMessage = {
-          id: Date.now() + 1,
-          text: data.response,
-          sender: 'bot',
-          timestamp: new Date().toLocaleTimeString(),
-        };
-
-        setMessages(prev => [...prev, botMessage]);
-        setIsTyping(false);
-      }, 800);
-    } catch (err) {
-      const errorMessage = {
+    setTimeout(() => {
+      const botMessage = {
         id: Date.now() + 1,
-        text: "⚠️ Sorry, couldn't reach the assistant. Please try again.",
+        text: mockBotResponse(text),
         sender: 'bot',
-        timestamp: new Date().toLocaleTimeString()
+        timestamp: new Date().toLocaleTimeString(),
       };
 
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages(prev => [...prev, botMessage]);
       setIsTyping(false);
-    }
+    }, 800);
   };
 
   const handleKeyPress = (e) => {
@@ -118,15 +108,13 @@ const Chatbot = () => {
             <div ref={messagesEndRef}></div>
           </div>
 
-          {messages.length <= 2 && (
-            <div className="quick-actions">
-              {quickActions.map((text, idx) => (
-                <button key={idx} onClick={() => handleQuickAction(text)}>
-                  {text}
-                </button>
-              ))}
-            </div>
-          )}
+          <div className="quick-actions">
+            {quickActions.map((text, idx) => (
+              <button key={idx} onClick={() => handleQuickAction(text)}>
+                {text}
+              </button>
+            ))}
+          </div>
 
           <div className="chatbot-input">
             <input
@@ -136,7 +124,7 @@ const Chatbot = () => {
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={handleKeyPress}
             />
-            <button onClick={handleSendMessage} disabled={!inputMessage.trim()}>
+            <button onClick={() => handleSendMessage()} disabled={!inputMessage.trim()}>
               ➤
             </button>
           </div>
