@@ -1,6 +1,5 @@
 # 🐝 Freelanchal – A Collaborative Workspace
 
-![Image](https://github.com/user-attachments/assets/24e86fe8-b8d3-4c37-a4ef-59db94d1aa0d)
 
 Freelanchal is a full-stack web application that helps freelancers **track projects**, **manage clients**, **log time**, **generate invoices**, and **interact via chatbot** – all in one place.
 
