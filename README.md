@@ -8,7 +8,11 @@ Freelanchal is a full-stack web application that helps freelancers **track proje
 ---
 
 ## 📸 Demo
+<img width="951" height="609" alt="Image" src="https://github.com/user-attachments/assets/788c3774-3eb8-4b68-88c3-01b661088285" />
+
+<img width="927" height="605" alt="Image" src="https://github.com/user-attachments/assets/f2ca8e33-4df1-459e-a023-f0b429b4587c" />
 ---
+
 
 ## 🔧 Features
 
